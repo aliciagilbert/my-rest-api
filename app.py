@@ -16,9 +16,12 @@ app.secret_key = 'jose'
 api = Api(app)
 
 #use this to get rid of the create_tables file; no longer need to do that step
+#after deploying to heroku put this in run.py file
+'''
 @app.before_first_request
 def create_tables():
 	db.create_all()									#before the first request runs create all tables
+'''
 
 jwt = JWT(app, authenticate, identity)				#creates endpoint /auth
 
