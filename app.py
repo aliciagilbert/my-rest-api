@@ -1,5 +1,6 @@
 #install Flask, Flask-JWT, Flaks-RESTful, Flask-SQLAlchemy
 #note: name input is in url while parser data in json payload
+import os
 from flask import Flask
 from flask_restful import Resource, Api
 from flask_jwt import JWT
@@ -10,7 +11,8 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'		#data.db found in root folder; could be mysql too
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'		#data.db found in root folder; could be mysql too
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False	#turn off change tracking to save resources
 app.secret_key = 'jose'
 api = Api(app)
